@@ -15,7 +15,12 @@ app = Flask(__name__, static_folder=os.path.join(os.path.dirname(__file__), 'sta
 app.config['SECRET_KEY'] = 'asdf#FGSgvasgf$5$WGT'
 
 # Configurar CORS para permitir requisições do frontend
-CORS(app, origins=['http://localhost:5173', 'http://127.0.0.1:5173'])
+# Configurar CORS para permitir requisições do frontend no Render
+CORS(app, origins=[
+    "http://localhost:5173",             # Para rodar local
+    "http://127.0.0.1:5173",             # Alternativa local
+    "https://pedido-oracao-frontend.onrender.com"  # Frontend hospedado no Render
+], supports_credentials=True)
 
 # Registrar blueprints
 app.register_blueprint(user_bp, url_prefix='/api')
